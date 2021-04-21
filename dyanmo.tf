@@ -5,11 +5,18 @@ terraform {
       version = "3.37.0"
     }
   }
+
+  backend "remote" {
+    organization = "sw-418"
+
+    workspaces {
+      name = "sw-418-dynamo"
+    }
+  }
 }
 
 provider "aws" {
-  profile = "default"
-  region  = "eu-west-1"
+  region = "eu-west-1"
 }
 
 resource "aws_dynamodb_table" "basic-dynamodb-table" {
